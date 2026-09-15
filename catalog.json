@@ -1,0 +1,72 @@
+{
+  "templates": [
+    {
+      "name": "Mutual NDA",
+      "description": "Mutual Non-Disclosure Agreement created by a committee of over 40 attorneys representing technology vendors, procurement teams, and law firms. Allows parties to protect confidential information in business discussions.",
+      "filename": "templates/Mutual-NDA.md"
+    },
+    {
+      "name": "Mutual NDA Cover Page",
+      "description": "Cover page for the Mutual NDA that incorporates the standard terms. Used to specify parties, effective date, term, governing law, and jurisdiction.",
+      "filename": "templates/Mutual-NDA-coverpage.md"
+    },
+    {
+      "name": "Cloud Service Agreement (CSA)",
+      "description": "Comprehensive agreement for selling and buying cloud software and SaaS products. Includes provisions for service access, restrictions, payment, term, warranties, liability, and confidentiality.",
+      "filename": "templates/CSA.md"
+    },
+    {
+      "name": "Design Partner Agreement",
+      "description": "Standard agreement for early product access and feedback partnerships. Allows vendors to give design partners early access to products in exchange for feedback to improve the product for general use.",
+      "filename": "templates/design-partner-agreement.md"
+    },
+    {
+      "name": "Service Level Agreement (SLA)",
+      "description": "Defines service level commitments and remedies for cloud service providers. Specifies uptime targets, response time commitments, and service credit calculations.",
+      "filename": "templates/sla.md"
+    },
+    {
+      "name": "Professional Services Agreement (PSA)",
+      "description": "Standard framework for service delivery and consulting engagements. Includes provisions for services, deliverables, intellectual property, payment, and termination.",
+      "filename": "templates/psa.md"
+    },
+    {
+      "name": "Data Processing Agreement (DPA)",
+      "description": "Comprehensive framework for GDPR and data protection compliance. Incorporates EU Standard Contractual Clauses (SCCs) and UK Addendum for lawful international data transfers.",
+      "filename": "templates/DPA.md"
+    },
+    {
+      "name": "Software License Agreement",
+      "description": "Comprehensive framework for software licensing and delivery. Covers software installation, use limitations, updates, support services, and open source compliance.",
+      "filename": "templates/Software-License-Agreement.md"
+    },
+    {
+      "name": "Partnership Agreement",
+      "description": "Standard framework for business partnerships and collaborations. Covers partnerships, reseller agreements, affiliate programs, channel partnerships, and brand licensing.",
+      "filename": "templates/Partnership-Agreement.md"
+    },
+    {
+      "name": "Business Associate Agreement (BAA)",
+      "description": "Standard framework for HIPAA compliance. Compliant with Health Insurance Portability and Accountability Act (HIPAA) Privacy Rule and Security Rule for handling protected health information.",
+      "filename": "templates/BAA.md"
+    },
+    {
+      "name": "Pilot Agreement",
+      "description": "Standard framework for trial and evaluation periods. Used when a prospective customer wants to test a product or service before committing to a longer-term commercial agreement.",
+      "filename": "templates/Pilot-Agreement.md"
+    },
+    {
+      "name": "AI Addendum",
+      "description": "Standard framework for artificial intelligence and machine learning components in agreements. Addresses legal and commercial considerations of AI services including model training, output ownership, and accuracy disclaimers.",
+      "filename": "templates/AI-Addendum.md"
+    }
+  ],
+  "metadata": {
+    "source": "Common Paper",
+    "source_url": "https://github.com/CommonPaper",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "created": "2026-09-15",
+    "total_templates": 12
+  }
+}
