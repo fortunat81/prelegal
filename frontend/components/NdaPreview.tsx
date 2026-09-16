@@ -2,7 +2,11 @@ import {
   NdaFormData,
   confidentialityTermText,
   formatDate,
+  governingLawText,
+  jurisdictionText,
   mndaTermText,
+  partyFieldText,
+  purposeText,
   standardTermsClauses,
 } from "@/lib/nda";
 
@@ -14,7 +18,7 @@ export default function NdaPreview({ data }: { data: NdaFormData }) {
       <h2>Cover Page</h2>
 
       <h3>Purpose</h3>
-      <p>{data.purpose || "[Purpose]"}</p>
+      <p>{purposeText(data)}</p>
 
       <h3>Effective Date</h3>
       <p>{formatDate(data.effectiveDate)}</p>
@@ -26,8 +30,8 @@ export default function NdaPreview({ data }: { data: NdaFormData }) {
       <p>{confidentialityTermText(data)}</p>
 
       <h3>Governing Law &amp; Jurisdiction</h3>
-      <p>Governing Law: {data.governingLaw || "[Fill in state]"}</p>
-      <p>Jurisdiction: {data.jurisdiction || "[Fill in city or county and state]"}</p>
+      <p>Governing Law: {governingLawText(data)}</p>
+      <p>Jurisdiction: {jurisdictionText(data)}</p>
 
       {data.modifications && (
         <>
@@ -47,23 +51,23 @@ export default function NdaPreview({ data }: { data: NdaFormData }) {
         <tbody>
           <tr>
             <td>Print Name</td>
-            <td>{data.party1.name || "—"}</td>
-            <td>{data.party2.name || "—"}</td>
+            <td>{partyFieldText(data.party1.name)}</td>
+            <td>{partyFieldText(data.party2.name)}</td>
           </tr>
           <tr>
             <td>Title</td>
-            <td>{data.party1.title || "—"}</td>
-            <td>{data.party2.title || "—"}</td>
+            <td>{partyFieldText(data.party1.title)}</td>
+            <td>{partyFieldText(data.party2.title)}</td>
           </tr>
           <tr>
             <td>Company</td>
-            <td>{data.party1.company || "—"}</td>
-            <td>{data.party2.company || "—"}</td>
+            <td>{partyFieldText(data.party1.company)}</td>
+            <td>{partyFieldText(data.party2.company)}</td>
           </tr>
           <tr>
             <td>Notice Address</td>
-            <td>{data.party1.noticeAddress || "—"}</td>
-            <td>{data.party2.noticeAddress || "—"}</td>
+            <td>{partyFieldText(data.party1.noticeAddress)}</td>
+            <td>{partyFieldText(data.party2.noticeAddress)}</td>
           </tr>
         </tbody>
       </table>

@@ -1,5 +1,5 @@
 :root {
-  --border: #d9dce1;
+  --border: #b8bec9;
   --bg-subtle: #f6f7f9;
   --text-muted: #5b6270;
   --accent: #1f4fd8;
@@ -73,11 +73,18 @@ h1 {
   margin-bottom: 14px;
 }
 
-.field label {
+.field label,
+.field legend {
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 4px;
+  padding: 0;
+}
+
+fieldset.field {
+  border: none;
+  margin: 0;
 }
 
 .field .hint {
@@ -123,18 +130,6 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 4px;
   margin: 0 4px;
-}
-
-.party-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-@media (max-width: 560px) {
-  .party-columns {
-    grid-template-columns: 1fr;
-  }
 }
 
 .sticky-preview {
@@ -200,6 +195,7 @@ button.download-btn:disabled {
 
 .document p {
   margin: 6px 0;
+  white-space: pre-wrap;
 }
 
 .document .clause {
@@ -219,6 +215,7 @@ button.download-btn:disabled {
   font-size: 0.82rem;
   text-align: left;
   vertical-align: top;
+  white-space: pre-wrap;
 }
 
 .document hr {

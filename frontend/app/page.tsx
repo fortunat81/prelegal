@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { pdf } from "@react-pdf/renderer";
 import NdaForm from "@/components/NdaForm";
 import NdaPreview from "@/components/NdaPreview";
-import NdaPdfDocument from "@/components/NdaPdfDocument";
 import { defaultNdaFormData } from "@/lib/nda";
 
 export default function Home() {
@@ -14,6 +12,10 @@ export default function Home() {
   async function handleDownload() {
     setIsGenerating(true);
     try {
+      const [{ pdf }, { default: NdaPdfDocument }] = await Promise.all([
+        import("@react-pdf/renderer"),
+        import("@/components/NdaPdfDocument"),
+      ]);
       const blob = await pdf(<NdaPdfDocument data={data} />).toBlob();
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");

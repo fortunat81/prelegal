@@ -53,6 +53,26 @@ export function formatDate(isoDate: string): string {
   });
 }
 
+export function purposeText(data: NdaFormData): string {
+  return data.purpose || "[Purpose]";
+}
+
+export function governingLawText(data: NdaFormData): string {
+  return data.governingLaw || "[Fill in state]";
+}
+
+export function jurisdictionText(data: NdaFormData): string {
+  return data.jurisdiction || "[Fill in city or county and state]";
+}
+
+export function partyFieldText(value: string): string {
+  return value || "—";
+}
+
+export function clampYears(value: string): number {
+  return Math.max(1, Number(value) || 1);
+}
+
 export function mndaTermText(data: NdaFormData): string {
   return data.mndaTermType === "expires"
     ? `Expires ${data.mndaTermYears} year(s) from Effective Date.`
@@ -76,13 +96,13 @@ export const standardTermsClauses: StandardTermsClause[] = [
     number: 1,
     title: "Introduction",
     body: (d) =>
-      `This Mutual Non-Disclosure Agreement (which incorporates these Standard Terms and the Cover Page (defined below)) (“MNDA”) allows each party (“Disclosing Party”) to disclose or make available information in connection with the ${d.purpose || "[Purpose]"} which (1) the Disclosing Party identifies to the receiving party (“Receiving Party”) as “confidential”, “proprietary”, or the like or (2) should be reasonably understood as confidential or proprietary due to its nature and the circumstances of its disclosure (“Confidential Information”). Each party's Confidential Information also includes the existence and status of the parties' discussions and information on the Cover Page. Confidential Information includes technical or business information, product designs or roadmaps, requirements, pricing, security and compliance documentation, technology, inventions and know-how. To use this MNDA, the parties must complete and sign a cover page incorporating these Standard Terms (“Cover Page”). Each party is identified on the Cover Page and capitalized terms have the meanings given herein or on the Cover Page.`,
+      `This Mutual Non-Disclosure Agreement (which incorporates these Standard Terms and the Cover Page (defined below)) (“MNDA”) allows each party (“Disclosing Party”) to disclose or make available information in connection with the ${purposeText(d)} which (1) the Disclosing Party identifies to the receiving party (“Receiving Party”) as “confidential”, “proprietary”, or the like or (2) should be reasonably understood as confidential or proprietary due to its nature and the circumstances of its disclosure (“Confidential Information”). Each party's Confidential Information also includes the existence and status of the parties' discussions and information on the Cover Page. Confidential Information includes technical or business information, product designs or roadmaps, requirements, pricing, security and compliance documentation, technology, inventions and know-how. To use this MNDA, the parties must complete and sign a cover page incorporating these Standard Terms (“Cover Page”). Each party is identified on the Cover Page and capitalized terms have the meanings given herein or on the Cover Page.`,
   },
   {
     number: 2,
     title: "Use and Protection of Confidential Information",
     body: (d) =>
-      `The Receiving Party shall: (a) use Confidential Information solely for the ${d.purpose || "[Purpose]"}; (b) not disclose Confidential Information to third parties without the Disclosing Party's prior written approval, except that the Receiving Party may disclose Confidential Information to its employees, agents, advisors, contractors and other representatives having a reasonable need to know for the ${d.purpose || "[Purpose]"}, provided these representatives are bound by confidentiality obligations no less protective of the Disclosing Party than the applicable terms in this MNDA and the Receiving Party remains responsible for their compliance with this MNDA; and (c) protect Confidential Information using at least the same protections the Receiving Party uses for its own similar information but no less than a reasonable standard of care.`,
+      `The Receiving Party shall: (a) use Confidential Information solely for the ${purposeText(d)}; (b) not disclose Confidential Information to third parties without the Disclosing Party's prior written approval, except that the Receiving Party may disclose Confidential Information to its employees, agents, advisors, contractors and other representatives having a reasonable need to know for the ${purposeText(d)}, provided these representatives are bound by confidentiality obligations no less protective of the Disclosing Party than the applicable terms in this MNDA and the Receiving Party remains responsible for their compliance with this MNDA; and (c) protect Confidential Information using at least the same protections the Receiving Party uses for its own similar information but no less than a reasonable standard of care.`,
   },
   {
     number: 3,
@@ -124,7 +144,7 @@ export const standardTermsClauses: StandardTermsClause[] = [
     number: 9,
     title: "Governing Law and Jurisdiction",
     body: (d) =>
-      `This MNDA and all matters relating hereto are governed by, and construed in accordance with, the laws of the State of ${d.governingLaw || "[Governing Law]"}, without regard to the conflict of laws provisions of such ${d.governingLaw || "[Governing Law]"}. Any legal suit, action, or proceeding relating to this MNDA must be instituted in the federal or state courts located in ${d.jurisdiction || "[Jurisdiction]"}. Each party irrevocably submits to the exclusive jurisdiction of such ${d.jurisdiction || "[Jurisdiction]"} in any such suit, action, or proceeding.`,
+      `This MNDA and all matters relating hereto are governed by, and construed in accordance with, the laws of the State of ${governingLawText(d)}, without regard to the conflict of laws provisions of such ${governingLawText(d)}. Any legal suit, action, or proceeding relating to this MNDA must be instituted in the federal or state courts located in ${jurisdictionText(d)}. Each party irrevocably submits to the exclusive jurisdiction of such ${jurisdictionText(d)} in any such suit, action, or proceeding.`,
   },
   {
     number: 10,

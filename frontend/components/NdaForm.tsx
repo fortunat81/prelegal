@@ -1,6 +1,6 @@
 "use client";
 
-import { NdaFormData, PartyInfo } from "@/lib/nda";
+import { NdaFormData, PartyInfo, clampYears } from "@/lib/nda";
 
 interface NdaFormProps {
   data: NdaFormData;
@@ -8,11 +8,9 @@ interface NdaFormProps {
 }
 
 function PartyFields({
-  label,
   party,
   onChange,
 }: {
-  label: string;
   party: PartyInfo;
   onChange: (party: PartyInfo) => void;
 }) {
@@ -93,10 +91,10 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
           </label>
         </div>
 
-        <div className="field">
-          <label>MNDA Term</label>
+        <fieldset className="field">
+          <legend>MNDA Term</legend>
           <span className="hint">The length of this MNDA</span>
-          <div className="radio-option">
+          <label className="radio-option">
             <input
               type="radio"
               name="mndaTermType"
@@ -109,14 +107,16 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
                 type="number"
                 min={1}
                 className="years-input"
+                aria-label="Number of years until the MNDA expires"
                 value={data.mndaTermYears}
                 onChange={(e) => set("mndaTermYears", Number(e.target.value))}
+                onBlur={(e) => set("mndaTermYears", clampYears(e.target.value))}
                 disabled={data.mndaTermType !== "expires"}
               />
               year(s) from Effective Date.
             </span>
-          </div>
-          <div className="radio-option">
+          </label>
+          <label className="radio-option">
             <input
               type="radio"
               name="mndaTermType"
@@ -124,13 +124,13 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
               onChange={() => set("mndaTermType", "continues")}
             />
             <span>Continues until terminated in accordance with the terms of the MNDA.</span>
-          </div>
-        </div>
+          </label>
+        </fieldset>
 
-        <div className="field">
-          <label>Term of Confidentiality</label>
+        <fieldset className="field">
+          <legend>Term of Confidentiality</legend>
           <span className="hint">How long Confidential Information is protected</span>
-          <div className="radio-option">
+          <label className="radio-option">
             <input
               type="radio"
               name="confidentialityTermType"
@@ -142,15 +142,17 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
                 type="number"
                 min={1}
                 className="years-input"
+                aria-label="Number of years Confidential Information is protected"
                 value={data.confidentialityTermYears}
                 onChange={(e) => set("confidentialityTermYears", Number(e.target.value))}
+                onBlur={(e) => set("confidentialityTermYears", clampYears(e.target.value))}
                 disabled={data.confidentialityTermType !== "years"}
               />
               year(s) from Effective Date, but in the case of trade secrets until Confidential
               Information is no longer considered a trade secret under applicable laws.
             </span>
-          </div>
-          <div className="radio-option">
+          </label>
+          <label className="radio-option">
             <input
               type="radio"
               name="confidentialityTermType"
@@ -158,8 +160,8 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
               onChange={() => set("confidentialityTermType", "perpetuity")}
             />
             <span>In perpetuity.</span>
-          </div>
-        </div>
+          </label>
+        </fieldset>
 
         <div className="field">
           <label>
@@ -201,20 +203,12 @@ export default function NdaForm({ data, onChange }: NdaFormProps) {
 
       <div className="panel">
         <h2>Party 1</h2>
-        <PartyFields
-          label="Party 1"
-          party={data.party1}
-          onChange={(party) => set("party1", party)}
-        />
+        <PartyFields party={data.party1} onChange={(party) => set("party1", party)} />
       </div>
 
       <div className="panel">
         <h2>Party 2</h2>
-        <PartyFields
-          label="Party 2"
-          party={data.party2}
-          onChange={(party) => set("party2", party)}
-        />
+        <PartyFields party={data.party2} onChange={(party) => set("party2", party)} />
       </div>
     </>
   );
