@@ -8,6 +8,7 @@ A Next.js prototype: fill in a form with party and deal details, preview the gen
 Paper Mutual NDA, and download it as a PDF.
 
 ```bash
+cd frontend
 npm install
 npm run dev
 ```
