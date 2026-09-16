@@ -67,6 +67,7 @@
     "license": "CC BY 4.0",
     "license_url": "https://creativecommons.org/licenses/by/4.0/",
     "created": "2026-09-15",
-    "total_templates": 12
+    "total_templates": 12,
+    "note": "Markdown files fetched verbatim from each repo's GitHub source via the GitHub API."
   }
 }
