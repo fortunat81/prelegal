@@ -44,7 +44,6 @@ next-env.d.ts
 
 # Node.js / npm / yarn
 node_modules/
-package-lock.json
 yarn.lock
 .pnp
 .pnp.js
