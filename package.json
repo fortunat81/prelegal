@@ -1,0 +1,14 @@
+{
+  "name": "prelegal",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm install --prefix frontend && npm install --prefix backend",
+    "start": "concurrently -n frontend,backend -c blue,green \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "stop": "kill-port 3000 4000"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "kill-port": "^2.0.1"
+  }
+}
