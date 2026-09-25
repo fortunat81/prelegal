@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import NdaChat from "@/components/NdaChat";
 import NdaForm from "@/components/NdaForm";
 import NdaPreview from "@/components/NdaPreview";
 import { defaultNdaFormData } from "@/lib/nda";
@@ -8,6 +9,7 @@ import { defaultNdaFormData } from "@/lib/nda";
 export default function Home() {
   const [data, setData] = useState(defaultNdaFormData);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [activeTab, setActiveTab] = useState<"form" | "chat">("form");
 
   async function handleDownload() {
     setIsGenerating(true);
@@ -40,13 +42,32 @@ export default function Home() {
 
       <div className="layout">
         <div>
-          <NdaForm data={data} onChange={setData} />
+          <div className="tab-bar">
+            <button
+              className={`tab-button${activeTab === "form" ? " active" : ""}`}
+              onClick={() => setActiveTab("form")}
+            >
+              Form
+            </button>
+            <button
+              className={`tab-button${activeTab === "chat" ? " active" : ""}`}
+              onClick={() => setActiveTab("chat")}
+            >
+              Chat
+            </button>
+          </div>
+          <div style={{ display: activeTab === "form" ? "block" : "none" }}>
+            <NdaForm data={data} onChange={setData} />
+          </div>
+          <div style={{ display: activeTab === "chat" ? "block" : "none" }}>
+            <NdaChat data={data} onChange={setData} />
+          </div>
         </div>
 
         <div className="sticky-preview">
           <div className="preview-toolbar">
             <h2 style={{ margin: 0 }}>Preview</h2>
-            <button className="download-btn" onClick={handleDownload} disabled={isGenerating}>
+            <button className="primary-btn" onClick={handleDownload} disabled={isGenerating}>
               {isGenerating ? "Generating…" : "Download PDF"}
             </button>
           </div>

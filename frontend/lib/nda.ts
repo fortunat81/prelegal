@@ -73,6 +73,20 @@ export function clampYears(value: string): number {
   return Math.max(1, Number(value) || 1);
 }
 
+export type NdaFormPatch = Partial<Omit<NdaFormData, "party1" | "party2">> & {
+  party1?: Partial<PartyInfo>;
+  party2?: Partial<PartyInfo>;
+};
+
+export function mergeNdaFormData(data: NdaFormData, patch: NdaFormPatch): NdaFormData {
+  return {
+    ...data,
+    ...patch,
+    party1: { ...data.party1, ...patch.party1 },
+    party2: { ...data.party2, ...patch.party2 },
+  };
+}
+
 export function mndaTermText(data: NdaFormData): string {
   return data.mndaTermType === "expires"
     ? `Expires ${data.mndaTermYears} year(s) from Effective Date.`

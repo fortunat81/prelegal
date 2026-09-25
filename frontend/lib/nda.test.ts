@@ -6,6 +6,7 @@ import {
   formatDate,
   governingLawText,
   jurisdictionText,
+  mergeNdaFormData,
   mndaTermText,
   partyFieldText,
   purposeText,
@@ -101,6 +102,40 @@ describe("fallback text helpers", () => {
   it("falls back to an em dash for blank party fields", () => {
     expect(partyFieldText("")).toBe("—");
     expect(partyFieldText("Jane Doe")).toBe("Jane Doe");
+  });
+});
+
+describe("mergeNdaFormData", () => {
+  it("applies a top-level scalar patch without touching other fields", () => {
+    const data = defaultNdaFormData();
+    const merged = mergeNdaFormData(data, { governingLaw: "Delaware" });
+    expect(merged.governingLaw).toBe("Delaware");
+    expect(merged.purpose).toBe(data.purpose);
+  });
+
+  it("merges a partial party1 patch without wiping out other party1 fields", () => {
+    const data = defaultNdaFormData();
+    data.party1 = { name: "Jane Doe", title: "CEO", company: "Acme", noticeAddress: "1 Main St" };
+    const merged = mergeNdaFormData(data, { party1: { company: "Acme Inc." } });
+    expect(merged.party1).toEqual({
+      name: "Jane Doe",
+      title: "CEO",
+      company: "Acme Inc.",
+      noticeAddress: "1 Main St",
+    });
+  });
+
+  it("merges party2 independently of party1", () => {
+    const data = defaultNdaFormData();
+    data.party1 = { name: "Jane Doe", title: "", company: "", noticeAddress: "" };
+    const merged = mergeNdaFormData(data, { party2: { name: "John Smith" } });
+    expect(merged.party1.name).toBe("Jane Doe");
+    expect(merged.party2.name).toBe("John Smith");
+  });
+
+  it("is a no-op for an empty patch", () => {
+    const data = defaultNdaFormData();
+    expect(mergeNdaFormData(data, {})).toEqual(data);
   });
 });
 
