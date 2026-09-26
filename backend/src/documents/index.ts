@@ -2,9 +2,17 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DocumentModule } from "../llm.js";
+import { aiAddendumModule } from "./aiAddendum.js";
 import { baaModule } from "./baa.js";
+import { csaModule } from "./csa.js";
+import { designPartnerAgreementModule } from "./designPartnerAgreement.js";
+import { dpaModule } from "./dpa.js";
 import { mutualNdaModule } from "./mutualNda.js";
+import { partnershipAgreementModule } from "./partnershipAgreement.js";
 import { pilotAgreementModule } from "./pilotAgreement.js";
+import { psaModule } from "./psa.js";
+import { slaModule } from "./sla.js";
+import { softwareLicenseAgreementModule } from "./softwareLicenseAgreement.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,7 +39,19 @@ const CATALOG_ID_BY_NAME: Record<string, string> = {
   "AI Addendum": "ai-addendum",
 };
 
-const registeredModules: DocumentModule<any>[] = [mutualNdaModule, baaModule, pilotAgreementModule];
+const registeredModules: DocumentModule<any>[] = [
+  mutualNdaModule,
+  baaModule,
+  pilotAgreementModule,
+  csaModule,
+  designPartnerAgreementModule,
+  slaModule,
+  psaModule,
+  dpaModule,
+  softwareLicenseAgreementModule,
+  partnershipAgreementModule,
+  aiAddendumModule,
+];
 
 export interface CatalogItem {
   id: string;
