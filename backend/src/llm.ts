@@ -5,11 +5,21 @@ export interface ChatMessage {
 
 export interface DocumentModule<TPatch> {
   id: string;
+  /** Should include CONVERSATION_GUIDANCE (see below) alongside the document-specific field list. */
   buildSystemPrompt(currentData: unknown): string;
   sanitizePatch(value: unknown): TPatch;
 }
 
 export class LlmError extends Error {}
+
+// Shared conversational-style guidance every document module's system prompt should
+// include, so present and future document types all get the same natural, guided
+// chat experience instead of each hand-writing (and drifting from) its own version.
+export const CONVERSATION_GUIDANCE = `How to interact with the user:
+- Have a natural conversation, not an interrogation. It's fine to ask about a couple of closely related fields together instead of one at a time.
+- If the user seems unsure about a field, offer a concrete example or a common default for agreements like this (e.g. "a common choice is 12 months — want me to use that?") and let them accept it or give their own answer.
+- If the user asks you to use a placeholder, a draft value, or to "fill it in later" for a text field, set that field to a short bracketed placeholder like "[TBD — confirm before signing]" rather than leaving it blank or refusing. Never do this for a date or numeric field — if one of those is genuinely unknown, default it to a sensible value (e.g. today's date, or a typical number for this kind of agreement) instead of a placeholder string.
+- Keep your tone warm and conversational, like a knowledgeable colleague helping someone move quickly, not a rigid form wizard.`;
 
 const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 const MODEL = "openai/gpt-oss-120b";

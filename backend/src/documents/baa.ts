@@ -1,4 +1,4 @@
-import { DocumentModule } from "../llm.js";
+import { CONVERSATION_GUIDANCE, DocumentModule } from "../llm.js";
 
 export interface EntityInfoPatch {
   legalName?: string;
@@ -21,7 +21,9 @@ const ENTITY_FIELDS = ["legalName", "signatoryName", "signatoryTitle", "noticeAd
 function buildSystemPrompt(currentData: unknown): string {
   return `You are helping a user fill out a Common Paper Business Associate Agreement (BAA) - a HIPAA compliance document between a "Provider" (the business associate performing services) and a "Company" (the covered entity) - through conversation.
 
-Ask the user about the document conversationally, one topic at a time. The fields you need to gather are:
+${CONVERSATION_GUIDANCE}
+
+The fields you need to gather are:
 - provider and company, each an object with: legalName, signatoryName, signatoryTitle, noticeAddress (all strings) - "provider" is the business associate handling PHI on the company's behalf, "company" is the covered entity
 - baaEffectiveDate (string, format yyyy-mm-dd)
 - breachNotificationPeriod (string): how quickly the provider must report a breach, e.g. "10 business days"

@@ -1,4 +1,4 @@
-import { DocumentModule } from "../llm.js";
+import { CONVERSATION_GUIDANCE, DocumentModule } from "../llm.js";
 
 export interface EntityInfoPatch {
   legalName?: string;
@@ -23,7 +23,9 @@ const ENTITY_FIELDS = ["legalName", "signatoryName", "signatoryTitle", "noticeAd
 function buildSystemPrompt(currentData: unknown): string {
   return `You are helping a user fill out a Common Paper Pilot Agreement - a short-term trial/evaluation agreement between a "Provider" and a "Customer" - through conversation.
 
-Ask the user about the document conversationally, one topic at a time. The fields you need to gather are:
+${CONVERSATION_GUIDANCE}
+
+The fields you need to gather are:
 - provider and customer, each an object with: legalName, signatoryName, signatoryTitle, noticeAddress (all strings)
 - effectiveDate (string, format yyyy-mm-dd)
 - pilotPeriod (string): how long the pilot lasts, e.g. "30 days from the Effective Date"

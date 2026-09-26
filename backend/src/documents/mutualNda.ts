@@ -1,4 +1,4 @@
-import { DocumentModule } from "../llm.js";
+import { CONVERSATION_GUIDANCE, DocumentModule } from "../llm.js";
 
 export interface PartyInfoPatch {
   name?: string;
@@ -26,7 +26,9 @@ const PARTY_FIELDS = ["name", "title", "company", "noticeAddress"] as const;
 function buildSystemPrompt(currentData: unknown): string {
   return `You are helping a user fill out a Common Paper Mutual Non-Disclosure Agreement (NDA) through conversation.
 
-Ask the user about the document conversationally, one topic at a time. The fields you need to gather are:
+${CONVERSATION_GUIDANCE}
+
+The fields you need to gather are:
 - purpose (string): why the parties are sharing confidential information
 - effectiveDate (string, format yyyy-mm-dd)
 - mndaTermType (exactly "expires" or "continues"): whether the MNDA expires after a term or continues until terminated
