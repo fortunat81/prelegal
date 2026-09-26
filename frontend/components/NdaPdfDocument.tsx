@@ -3,7 +3,11 @@ import {
   NdaFormData,
   confidentialityTermText,
   formatDate,
+  governingLawText,
+  jurisdictionText,
   mndaTermText,
+  partyFieldText,
+  purposeText,
   standardTermsClauses,
 } from "@/lib/nda";
 
@@ -101,7 +105,7 @@ export default function NdaPdfDocument({ data }: { data: NdaFormData }) {
 
         <Text style={styles.fieldLabel}>Purpose</Text>
         <Text style={styles.hint}>How Confidential Information may be used</Text>
-        <Text style={styles.fieldValue}>{data.purpose || "[Purpose]"}</Text>
+        <Text style={styles.fieldValue}>{purposeText(data)}</Text>
 
         <Text style={styles.fieldLabel}>Effective Date</Text>
         <Text style={styles.fieldValue}>{formatDate(data.effectiveDate)}</Text>
@@ -115,12 +119,8 @@ export default function NdaPdfDocument({ data }: { data: NdaFormData }) {
         <Text style={styles.fieldValue}>{confidentialityTermText(data)}</Text>
 
         <Text style={styles.fieldLabel}>Governing Law &amp; Jurisdiction</Text>
-        <Text style={styles.fieldValue}>
-          Governing Law: {data.governingLaw || "[Fill in state]"}
-        </Text>
-        <Text style={styles.fieldValue}>
-          Jurisdiction: {data.jurisdiction || "[Fill in city or county and state]"}
-        </Text>
+        <Text style={styles.fieldValue}>Governing Law: {governingLawText(data)}</Text>
+        <Text style={styles.fieldValue}>Jurisdiction: {jurisdictionText(data)}</Text>
 
         {data.modifications ? (
           <>
@@ -142,23 +142,23 @@ export default function NdaPdfDocument({ data }: { data: NdaFormData }) {
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCellLabel}>Print Name</Text>
-            <Text style={styles.tableCell}>{data.party1.name}</Text>
-            <Text style={styles.tableCellLast}>{data.party2.name}</Text>
+            <Text style={styles.tableCell}>{partyFieldText(data.party1.name)}</Text>
+            <Text style={styles.tableCellLast}>{partyFieldText(data.party2.name)}</Text>
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCellLabel}>Title</Text>
-            <Text style={styles.tableCell}>{data.party1.title}</Text>
-            <Text style={styles.tableCellLast}>{data.party2.title}</Text>
+            <Text style={styles.tableCell}>{partyFieldText(data.party1.title)}</Text>
+            <Text style={styles.tableCellLast}>{partyFieldText(data.party2.title)}</Text>
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCellLabel}>Company</Text>
-            <Text style={styles.tableCell}>{data.party1.company}</Text>
-            <Text style={styles.tableCellLast}>{data.party2.company}</Text>
+            <Text style={styles.tableCell}>{partyFieldText(data.party1.company)}</Text>
+            <Text style={styles.tableCellLast}>{partyFieldText(data.party2.company)}</Text>
           </View>
           <View style={styles.tableRow}>
             <Text style={styles.tableCellLabel}>Notice Address</Text>
-            <Text style={styles.tableCell}>{data.party1.noticeAddress}</Text>
-            <Text style={styles.tableCellLast}>{data.party2.noticeAddress}</Text>
+            <Text style={styles.tableCell}>{partyFieldText(data.party1.noticeAddress)}</Text>
+            <Text style={styles.tableCellLast}>{partyFieldText(data.party2.noticeAddress)}</Text>
           </View>
           <View style={styles.tableRowLast}>
             <Text style={styles.tableCellLabel}>Date</Text>

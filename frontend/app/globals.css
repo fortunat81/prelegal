@@ -1,5 +1,5 @@
 :root {
-  --border: #d9dce1;
+  --border: #b8bec9;
   --bg-subtle: #f6f7f9;
   --text-muted: #5b6270;
   --accent: #1f4fd8;
@@ -73,11 +73,18 @@ h1 {
   margin-bottom: 14px;
 }
 
-.field label {
+.field label,
+.field legend {
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 4px;
+  padding: 0;
+}
+
+fieldset.field {
+  border: none;
+  margin: 0;
 }
 
 .field .hint {
@@ -125,18 +132,6 @@ h1 {
   margin: 0 4px;
 }
 
-.party-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-@media (max-width: 560px) {
-  .party-columns {
-    grid-template-columns: 1fr;
-  }
-}
-
 .sticky-preview {
   position: sticky;
   top: 24px;
@@ -149,7 +144,7 @@ h1 {
   margin-bottom: 12px;
 }
 
-button.download-btn {
+button.primary-btn {
   background: var(--accent);
   color: #fff;
   border: none;
@@ -160,11 +155,11 @@ button.download-btn {
   cursor: pointer;
 }
 
-button.download-btn:hover {
+button.primary-btn:hover {
   background: var(--accent-hover);
 }
 
-button.download-btn:disabled {
+button.primary-btn:disabled {
   background: #9aa4b8;
   cursor: not-allowed;
 }
@@ -200,6 +195,7 @@ button.download-btn:disabled {
 
 .document p {
   margin: 6px 0;
+  white-space: pre-wrap;
 }
 
 .document .clause {
@@ -219,10 +215,94 @@ button.download-btn:disabled {
   font-size: 0.82rem;
   text-align: left;
   vertical-align: top;
+  white-space: pre-wrap;
 }
 
 .document hr {
   border: none;
   border-top: 1px solid var(--border);
   margin: 24px 0;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tab-button.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.chat-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 240px;
+  max-height: 480px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.chat-bubble {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-width: 85%;
+  white-space: pre-wrap;
+}
+
+.chat-bubble.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+}
+
+.chat-bubble.assistant {
+  align-self: flex-start;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+}
+
+.chat-error {
+  color: #b3261e;
+  font-size: 0.85rem;
+  margin: 0 0 8px;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.chat-input-row textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 120px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: vertical;
 }
